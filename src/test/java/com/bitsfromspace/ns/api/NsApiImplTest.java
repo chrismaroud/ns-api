@@ -168,7 +168,10 @@ public class NsApiImplTest {
         assertEquals("Almere Oostvaarders-Weesp/Naarden-Bussum", interruptions.getScheduledInterruptions().get(0).getRoute());
         assertEquals("zaterdag 18 en zondag 19 december", interruptions.getScheduledInterruptions().get(0).getPeriodDescription());
         assertEquals("Beperkt treinverkeer, businzet en/of omreizen, extra reistijd 15-30 min.", interruptions.getScheduledInterruptions().get(0).getReasonDescription());
-        assertEquals("Maak gebruik van de overige treinen of de bussen:                 reis tussen Weesp en Almere Centrum met de NS-bus in                 plaats van de trein tussen Almere Centrum en Lelystad                 Centrum rijden vier Sprinters per uur reis tussen Almere                 Muziekwijk en Naarden-Bussum via Weesp",
+        assertEquals("Maak gebruik van de overige treinen of de bussen: reis tussen Weesp en Almere Centrum met de NS-bus\n" +
+                        "                in plaats van de trein tussen Almere Centrum en Lelystad Centrum rijden vier Sprinters per uur reis\n" +
+                        "                tussen Almere Muziekwijk en Naarden-Bussum via Weesp\n" +
+                        "            ",
                 interruptions.getScheduledInterruptions().get(0).getAdviceDescription());
 
 
