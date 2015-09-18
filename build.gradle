@@ -1,8 +1,13 @@
-group 'com.bitsfromspace'
-version '1.0-SNAPSHOT'
-
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+group 'com.bitsfromspace'
+archivesBaseName = 'ns-api'
+version '1.0-SNAPSHOT'
+
+
 
 repositories {
     mavenCentral()
@@ -11,4 +16,62 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile 'org.mockito:mockito-all:1.10.19'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives sourcesJar
+}
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.gra.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'NS-API'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'A simple-to-use JAVA api that implements the public NS REST API Services'
+                url 'https://github.com/chrismaroud/ns-api'
+
+//                scm {
+//                    connection 'scm:git:https://github.com/chrismaroud/ns-api.git'
+//                    developerConnection 'scm:git:https://github.com/chrismaroud/ns-api.git'
+//                    url 'https://github.com/chrismaroud/ns-api'
+//                }
+
+//                licenses {
+//                    license {
+//                        name 'The Apache License, Version 2.0'
+//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                    }
+//                }
+
+                developers {
+                    developer {
+                        id 'chrismaroud'
+                        name 'Chris Oudeman'
+                        email 'chris@oudeman.com'
+                    }
+                }
+            }
+        }
+    }
 }
