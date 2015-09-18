@@ -5,7 +5,9 @@ The NS provides a set of [public REST services](http://www.ns.nl/api/api) for no
 # Getting started
 
 ### Step 1. Request access to the public NS REST services
-Submit the access request form [here](https://www.ns.nl/ews-aanvraagformulier/). An username and password will be emailed to you immediately after.
+Submit the API access request form to get access to the NS REST API services:  [https://www.ns.nl/ews-aanvraagformulier/](https://www.ns.nl/ews-aanvraagformulier/). 
+
+An username and password will be emailed to you immediately after.
 
 ### Step 2. Add ns-api to your project
 Gradle:
