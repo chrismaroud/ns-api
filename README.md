@@ -1,6 +1,6 @@
 ![](https://upload.wikimedia.org/wikipedia/en/d/dd/Nederlandse_spoorwegen_logo.svg)
 # What is the NS API?
-The NS provides a set of [public REST services](http://www.ns.nl/api/api) for non-commercial use by outside developers. This project provides a simple-to-use Java implementation and doesn't depend on any third-party libraries.
+The NS (Dutch Railways) provides a set of [public REST services](http://www.ns.nl/api/api) for non-commercial use by outside developers. This project provides a simple-to-use Java implementation and doesn't depend on any third-party libraries.
 
 # Getting started
 
