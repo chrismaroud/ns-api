@@ -48,7 +48,7 @@ public class HttpTransportImpl implements HttpTransport {
             }
             try {
                 queryString.append(queryString.length() == 0 ? '?' : '&')
-                        .append(encode(parameter.getValue(), UTF8))
+                        .append(encode(parameter.getKey(), UTF8))
                         .append('=')
                         .append(encode(parameter.getValue(), UTF8));
             } catch (UnsupportedEncodingException uee) {

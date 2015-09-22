@@ -7,8 +7,6 @@ group 'com.bitsfromspace'
 archivesBaseName = 'ns-api'
 version '1.0-SNAPSHOT'
 
-
-
 repositories {
     mavenCentral()
 }
@@ -38,10 +36,12 @@ uploadArchives {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
             repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                print('release repo: ${ossrhUsername} / ${ossrhPassword}')
                 authentication(userName: hasProperty('ossrhUsername') ? ossrhUsername : '', password: hasProperty('ossrhPassword') ? ossrhPassword : '')
             }
 
             snapshotRepository(url: "https://oss.gra.org/content/repositories/snapshots/") {
+                print('snapshot repo: ${ossrhUsername} / ${ossrhPassword}')
                 authentication(userName: hasProperty('ossrhUsername') ? ossrhUsername : '', password: hasProperty('ossrhPassword') ? ossrhPassword : '')
             }
 
@@ -52,18 +52,6 @@ uploadArchives {
                 description 'A simple-to-use JAVA api that implements the public NS REST API Services'
                 url 'https://github.com/chrismaroud/ns-api'
 
-//                scm {
-//                    connection 'scm:git:https://github.com/chrismaroud/ns-api.git'
-//                    developerConnection 'scm:git:https://github.com/chrismaroud/ns-api.git'
-//                    url 'https://github.com/chrismaroud/ns-api'
-//                }
-
-//                licenses {
-//                    license {
-//                        name 'The Apache License, Version 2.0'
-//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                    }
-//                }
 
                 developers {
                     developer {
