@@ -4,9 +4,11 @@ import com.bitsfromspace.ns.api.Credentials;
 import com.bitsfromspace.ns.api.NsApiError;
 import com.bitsfromspace.ns.api.io.HttpTransport;
 import com.bitsfromspace.ns.api.utils.IoUtils;
+import com.bitsfromspace.ns.api.utils.StringUtils;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -58,7 +60,18 @@ public class NsRestSessionImpl implements NsRestSession {
             public T execute() {
                 try (InputStream in = httpTransport.get(apiBaseUrl + serviceName, parameters, singletonMap(AUTHORIZATION_HEADER, authorizationHeader))) {
                     //noinspection unchecked
-                    return (T) unmarshaller.unmarshal(in);
+                    String response = IoUtils.readFully(in);
+                    try {
+                        //noinspection unchecked
+                        return (T) unmarshaller.unmarshal(new ByteArrayInputStream(response.getBytes()));// on-error response code == 200 :(
+                    } catch (JAXBException jaxB) {
+                        String error = StringUtils.readBetween(response, "<message>", "</message>");
+                        //noinspection ConstantConditions
+                        if (error != null && !error.isEmpty()) {
+                            throw new NsApiError(error, jaxB);
+                        }
+                        throw jaxB;
+                    }
                 } catch (IOException | JAXBException ex) {
                     throw new NsApiError(ex);
                 }
