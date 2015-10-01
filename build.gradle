@@ -35,6 +35,9 @@ signing {
 }
 
 uploadArchives {
+    def ossrhUsername = project.hasProperty('ossrhUsername') ? ossrhUsername : '';
+    def ossrhPassword = project.hasProperty('ossrhPassword') ? ossrhPassword : '';
+
     repositories {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
