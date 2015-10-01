@@ -12,9 +12,16 @@ An username and password will be emailed to you immediately after.
 
 ### Step 2. Add ns-api to your project
 Gradle:
+    'com.bitsfromspace:ns-api:1.0-SNAPSHOT'
 
 Maven:
-
+```xml
+<dependency>
+  <groupId>com.bitsfromspace</groupId>
+  <artifactId>ns-api</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</dependency>
+```
 Or download the latest release here: 
 
 ### Step 3. Use the API
