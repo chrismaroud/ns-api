@@ -5,11 +5,7 @@ apply plugin: 'signing'
 
 group 'com.bitsfromspace'
 archivesBaseName = 'ns-api'
-version '1.0'
-
-
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+version '0.9'
 
 repositories {
     mavenCentral()
@@ -35,47 +31,32 @@ signing {
 }
 
 uploadArchives {
-    def ossrhUsername = project.hasProperty('ossrhUsername') ? ossrhUsername : '';
-    def ossrhPassword = project.hasProperty('ossrhPassword') ? ossrhPassword : '';
-
     repositories {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
             repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
+                authentication(userName: hasProperty('ossrhUsername') ? ossrhUsername : '', password: hasProperty('ossrhPassword') ? ossrhPassword : '')
             }
 
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
+            snapshotRepository(url: "https://oss.gra.org/content/repositories/snapshots/") {
+                authentication(userName: hasProperty('ossrhUsername') ? ossrhUsername : '', password: hasProperty('ossrhPassword') ? ossrhPassword : '')
             }
 
             pom.project {
-                name 'NS Java API'
+                name 'NS-API'
                 packaging 'jar'
                 // optionally artifactId can be defined here
                 description 'A simple-to-use JAVA api that implements the public NS REST API Services'
                 url 'https://github.com/chrismaroud/ns-api'
 
-                scm {
-                    url 'https://github.com/chrismaroud/ns-api'
-                    connection 'scm:https://chrismaroud@github.com/chrismaroud/ns-api.git'
-                    developerConnection 'scm:git://github.com/chrismaroud/ns-api.git'
-                }
-
-                licenses {
-                    license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
 
                 developers {
                     developer {
-                        id 'manfred'
-                        name 'Manfred Moser'
-                        email 'manfred@sonatype.com'
-                    }
+                        id 'chrismaroud'
+                        name 'Chris Oudeman'
+                        email 'chris@oudeman.com'
+                   }
                 }
             }
         }

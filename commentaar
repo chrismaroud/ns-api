@@ -1,0 +1,11 @@
+ns-api-prijzen-v3 geeft http 400 (bad request) terug ipv 401 (unauthorized)
+ns-api-prijzen-v3 date format is ddMMMyyyy, terwijl in avt is ISO8601
+ns-api-pijzen: atrributes lower case, stations-v2, tags upper case ...
+ns-api-prijzen: soms nederland (Kortinprijs att "name" en dan attribute in het nederlands "naam" )..
+                requestparams engels (from, to dateTime), result in nederlands..
+
+                ns-api-storingen: parameter "actual"... seriously?
+
+                ns-api-storingen: node "id"->lowercase, andere uppercase
+
+                <Ongepland></ongepland> (start:CAPITAL, end:lower)...
